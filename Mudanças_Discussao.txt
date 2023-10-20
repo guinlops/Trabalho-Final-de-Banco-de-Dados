@@ -1,0 +1,29 @@
+Mudanças:
+1_ Seguros passa a ser uma entidade forte.
+->Por definição (no slide ProjetoConceitual 1),  entidade fraca é uma entidade que não possui um atributo identificador e sua existencia depende da existencia de outra entidade.
+->Seguros tem identificador próprio e não depende da existencia de outra entidade
+
+2_ Investimentos passa a ser uma entidade forte.
+->Pela mesma definicao de entidade fraca
+->Investimentos tem identificador próprio e não depende da existencia de outra entidade
+
+3_ Emprestimos passa a ser uma entidade forte.
+->Pela mesma definicao de entidade fraca
+
+4_ Conta Poupanca passa a ser uma entidade forte.
+->Pela mesma definicao de entidade fraca, conta poupanca tem identificador próprio e não precisa de outra entidade para existir. Mesmo que só exista conta poupança se tiver cliente, isso não implica que a conta poupanca é uma entidade fraca, apenas implica que a participacao é total em conta poupanca e parcial em cliente
+
+5_Cartao de Debito terá atributos: Num_cartao_D, Data_validade, Nome_no_Cartao, cód_seguranca, status(ativo ou inativo), tipo(bandeira)
+
+6_Emprestimo passa a ter COD_EMPRESTIMO que representará o cod_contrato como atributo chave e taxajuros e parcelamento
+->Nesse caso nao tem emprestimos como produtos, emprestimos sao unicos para cada cliente.
+
+
+7_Entidade Tipos_Seguros guarda informacoes de Tipos de seguro como produto, E a Entidade Seguros serve para identificar quais clientes tem seguros, o cód do contrato, e o tipo de Seguro.
+
+8_Investimentos serve pra identificar clientes que possuem investimentos, Tipos_investimentos para identificar os tipos de investimentos 
+
+
+
+
+
