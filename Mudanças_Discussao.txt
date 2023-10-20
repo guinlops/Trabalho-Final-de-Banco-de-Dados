@@ -1,3 +1,6 @@
-1)Conta corrente passa a ser uma entidade forte
+1_ A instância de "Pessoa" pode pertencer a mais de uma subclasse simultaneamente, o que é uma característica da especialização sobreposta. 
+->por isso a especialização de overlapping
 
-2) Cartao de crédito passa a ter mais atributos e tem uma relação com Tipos_Cartoes para identificar o tipo de cartao
+2_A entidade Funcionario pode ser de 3 tipos, Gestor investimentos, gestor Seguros e Vendas e tem (por opção) uma chave primaria própria, alem dos atributos data_inicio e salario
+
+->falta adicionar as relacoes de vendedor, gestor seguro e gestor investimento
