@@ -3,7 +3,4 @@
 
 2_A entidade Funcionario pode ser de 3 tipos, Gestor investimentos, gestor Seguros e Vendas e tem (por opção) uma chave primaria própria, alem dos atributos data_inicio e salario
 
-3) um Vendedor tem um bonus mensal se vender um seguro ou um investimento
-->Esse dado pode ser obtido se fizermos a consulta em Investimentos ou em Seguros de data início e vendedor_responsável, ideia do thiago
-
-ainda faltam fazer mais relacoes com funcionarios.
+->falta adicionar as relacoes de vendedor, gestor seguro e gestor investimento
