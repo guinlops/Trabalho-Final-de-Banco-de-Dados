@@ -1,0 +1,98 @@
+–consultas simples
+nome e telefones das pessoas que moram na rua Z:
+	select p.P_nome, p.U_nome, t.telefone 
+from pessoa p, telefones t 
+where p.cpf = t.cpf and p.rua = 'Rua Z';
+
+nome dos funcionários que sao vendedores:
+	select p_nome, u_nome 
+from pessoa p 
+where p.cpf in (select cpf from funcionarios f, vendedores v where f.id_funcionario = v.id_funcionario)
+
+nome e saldo das pessoa que possuem mais de 500 reais na conta poupanca
+select p_nome, u_nome, saldo 
+from pessoa p, conta_poupanca cp
+where cp.saldo >=500 and cp.cpf_cliente = p.cpf
+
+nome e cpf dos funcionarios que sao clientes
+
+SELECT p.p_nome, p.u_nome, p.cpf
+FROM pessoa p	
+WHERE p.cpf IN (
+SELECT c.cpf
+               	FROM funcionarios f
+               	JOIN cliente c ON f.cpf = c.cpf);
+
+–agregacao
+total disponivel em acoes da empresa capicoin:
+SELECT SUM(i.VALOR_ATUAL) AS total_em_acoes
+FROM investimentos i
+JOIN cliente c ON c.cpf = i.cpf_cliente
+JOIN tipos_investimentos t ON t.emp_gestora = 'capicoin';
+
+–juncao de duas tabelas
+informações sobre os investimentos vendidos, incluindo detalhes sobre o vendedor e o tipo de investimento:
+SELECT
+    i.COD_CONTRATO,
+    i.DATA_INICIO,
+    i.VALOR_ATUAL,
+    v.BONUS_MENSAL AS BONUS_VENDEDOR,
+    t.TIPO,
+    t.TEMPO_MIN,
+    t.TAXA,
+    t.EMP_GESTORA,
+    t.RETORNO
+FROM
+    Investimentos i
+JOIN
+    Vendedores v ON i.VENDIDO_POR = v.ID_FUNCIONARIO
+JOIN
+    Tipos_Investimentos t ON i.TIPO_ID = t.ID_INVESTIMENTO;
+
+
+total de investimentos vendido por cada vendedor
+SELECT
+    v.ID_FUNCIONARIO,
+    v.BONUS_MENSAL,
+    SUM(i.VALOR_ATUAL) AS TOTAL_INVESTIDO
+FROM
+    Vendedores v
+JOIN
+    Investimentos i ON v.ID_FUNCIONARIO = i.VENDIDO_POR
+GROUP BY
+    v.ID_FUNCIONARIO, v.BONUS_MENSAL;
+
+Mostra os nomes de todas pessoas que fizeram algum seguro 
+SELECT s.ID,CPF_CLIENTE, p.P_NOME
+FROM SEGUROS s,TIPOS_DE_SEGUROS T, PESSOA p
+WHERE s.ID = t.ID_SEGURO AND s.CPF_CLIENTE = p.CPF;
+
+–join de 3 tabs
+seleciona informações gerais sobre seguros
+SELECT
+    s.COD_CONTRATO,
+    s.CPF_CLIENTE,
+    ts.TIPO,
+    ts.CUSTO_ANUAL,
+    ts.TAXA_MENSAL
+FROM
+    Seguros s
+JOIN
+    Vendedores v ON s.VENDIDO_POR = v.ID_FUNCIONARIO
+JOIN
+    Tipos_De_Seguros ts ON s.ID = ts.ID_SEGURO;
+
+calcula o total vendido em seguros por vendedor
+
+SELECT
+    v.ID_FUNCIONARIO,
+    v.BONUS_MENSAL,
+    SUM(ts.CUSTO_ANUAL) AS TOTAL_VENDIDO
+FROM
+    Vendedores v
+JOIN
+    Seguros s ON v.ID_FUNCIONARIO = s.VENDIDO_POR
+JOIN
+    Tipos_De_Seguros ts ON s.ID = ts.ID_SEGURO
+GROUP BY
+    v.ID_FUNCIONARIO, v.BONUS_MENSAL;
